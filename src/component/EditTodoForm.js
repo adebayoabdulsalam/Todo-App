@@ -1,8 +1,20 @@
-import { render } from '@testing-library/react'
-import React from 'react'
+import React, {useState} from 'react'
 
-export const EdiTodoForm = () => {
+export const EditTodoForm = ({editTodo ,task}) => {
+    const [ value, setValue] = useState(task.task)
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        editTodo(value, task.id);
+
+        setValue("")
+    }
     return (
-        <div>ditTodoForm</div>
+        <form className='TodoForm' onSubmit={handleSubmit}>
+            <input type='text' className='todo-input' 
+             value={value} placeholder='Update Task'
+             onChange={(e) => setValue(e.target.value)}/>
+            <button type='submit' className='todo-btn'>Update Task</button>
+        </form>
     )
 }
